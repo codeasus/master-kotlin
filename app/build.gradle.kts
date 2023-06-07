@@ -1,6 +1,12 @@
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.6.21"
+    kotlin("jvm") version "1.8.20"
     application
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 repositories {
@@ -22,6 +28,8 @@ dependencies {
 
     // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
 }
 
 application {
