@@ -2,14 +2,16 @@ package master.kotlin
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.produce
-import kotlinx.coroutines.flow.collectLatest
 import master.kotlin.coroutines.Basics
-import master.kotlin.coroutines.NumberFormatManagementService
 import java.lang.Runnable
 
 class App {
     fun run() {
-        Basics().perform()
+        Basics()
+    }
+
+    suspend fun runSuspend() {
+        Basics().perforrmTestThree()
     }
 }
 
@@ -45,15 +47,7 @@ fun CoroutineScope.nameProducingChannel() = produce {
 }
 
 fun main() {
-    val numberFormatManagementService = NumberFormatManagementService()
     runBlocking {
-        launch {
-            numberFormatManagementService.fetchNumber()
-        }
-        numberFormatManagementService.formattedNumber.collectLatest {
-            println(":: $it")
-        }
-//        delay(3000)
-//        print("Invoked: ${numberFormatManagementService.getFormattedNumber()}")
+        App().runSuspend()
     }
 }
