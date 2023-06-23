@@ -11,7 +11,11 @@ class App {
     }
 
     suspend fun runSuspend() {
-        Basics().perforrmTestThree()
+        val userPhoneNumbers = listOf(
+            "+1203455455",
+            "+44307899099"
+        )
+        Basics().handleAttachmentsForSelectedContact(userPhoneNumbers.first())
     }
 }
 

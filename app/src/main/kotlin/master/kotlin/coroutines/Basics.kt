@@ -89,11 +89,40 @@ class Basics {
             task.second.join()
         }
         for(task in completedTaskSet) {
-            println("TASK${task.first}<SUCCESS> completed.")
+            println("[SUCCESS]::TASK${task.first} completed.")
         }
         for(task in failedTaskSet) {
-            println("TASK${task.first}<ERROR> failed. Reason ${task.second}")
+            println("[ERROR]::TASK${task.first} failed. Reason ${task.second}")
         }
         println("Tasks have been processed")
+    }
+
+    private suspend fun getThreadIdByPhoneNumber(phoneNumber: String) {
+        println("Fetching the threadId by '$phoneNumber'...")
+        delay(2000)
+        println("Fetched the threadId by '$phoneNumber'.")
+    }
+
+    private suspend fun syncMessages(messages: List<String>) {
+        messages.forEach {
+            println("[LOCAL_PROGRESS]: Syncing the message '${it}'...")
+            delay(3000)
+            println("[LOCAL_COMPLETED]: Synced the message '${it}'")
+        }
+    }
+
+    private fun sendMessages(messages: List<String>) {
+        messages.forEach {
+            println("[REMOTE_PROGRESS]: Sending the message '${it}'...")
+            println("[REMOTE_COMPLETED]: Sent the message '${it}'")
+        }
+    }
+
+    suspend fun handleAttachmentsForSelectedContact(phoneNumber: String) {
+        getThreadIdByPhoneNumber(phoneNumber)
+        println("Mapping objects to be later inserted to the database...")
+        val messages = listOf("Apple", "Orange", "Banana")
+        syncMessages(messages)
+        sendMessages(messages)
     }
 }
